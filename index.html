@@ -5,17 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cellular Automaton - Social Influence Simulation</title>
-    <style>
-        canvas {
-            display: block;
-            margin: 0 auto;
-            border: 1px solid black;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <canvas id="canvas" width="500" height="500"></canvas>
+    <div class="content-container">
+        <div class="config-container">
+            <label id="speed-slider-label" for="speed-slider">Speed: </label>
+            <input type="range" min="1" max="100" value="50" class="slider" id="speed-slider">
+            <label id="grid-size-slider-label" for="grid-size-slider">Grid size: </label>
+            <input type="range" min="50" max="500" value="100" class="slider" id="grid-size-slider">
+            <br>
+            <button id="restart-button" onClick="restart()">Restart</button>
+        </div>
+        <div class="main-container">
+            <h1>Cellular Automaton - Social Influence Simulator</h1>
+            <canvas id="canvas" width="500" height="500"></canvas>
+        </div>
+    </div>
 </body>
 
 <script src="automaton.js"></script>

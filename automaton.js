@@ -1,14 +1,24 @@
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 
-const gridSize = 100;
-const cellSize = canvas.width / gridSize;
-const grid = [];
-const updateDelay = 50;
+const restartButton = document.getElementById('restart-button');
+const gridSizeSlider = document.getElementById('grid-size-slider');
+const gridSizeSliderLabel = document.getElementById('grid-size-slider-label');
+const speedSlider = document.getElementById('speed-slider');
+const speedSliderLabel = document.getElementById('speed-slider-label');
+
+let gridSize = 100;
+let newGridSize = gridSize;
+let cellSize;
+let updateDelay = 50;
+let newGrid = [];
+let grid = [];
+
 
 function initGrid() {
     for (let x = 0; x < gridSize; x++) {
         grid[x] = [];
+        newGrid[x] = [];
         for (let y = 0; y < gridSize; y++) {
             grid[x][y] = getRandomColor();
         }
@@ -45,10 +55,15 @@ function updateGrid() {
     for (let x = 0; x < gridSize; x++) {
         for (let y = 0; y < gridSize; y++) {
             if (Math.random() < probability) {
-                grid[x][y] = getRandomNeighbor(x, y);
+                newGrid[x][y] = getRandomNeighbor(x, y);
+            }
+            else {
+                newGrid[x][y] = grid[x][y];
             }
         }
     }
+    // Deep copy newGrid to grid
+    grid = newGrid.map(arr => arr.slice());
 }
 
 function getRandomColor() {
@@ -60,12 +75,35 @@ function getRandomColor() {
     return color;
 }
 
+function initValues() {
+    gridSize = gridSizeSlider.value;
+    gridSizeSliderLabel.textContent = "Grid size: " + gridSizeSlider.value;
+    speedSliderLabel.textContent = "Speed: " + speedSlider.value;
+    cellSize = canvas.width / gridSize;
+}
+
 function main() {
     updateGrid();
     drawGrid();
     setTimeout(main, updateDelay);
 }
 
-initGrid();
-drawGrid();
-main();
+function restart() {
+    initValues()
+    initGrid();
+    drawGrid();
+    main();
+}
+
+restart();
+
+gridSizeSlider.addEventListener('input', function () {
+    gridSizeSliderLabel.textContent = "Grid size: " + gridSizeSlider.value;
+    newGridSize = gridSizeSlider.value;
+});
+
+speedSlider.addEventListener('input', function () {
+    const invertedValue = 100 - speedSlider.value;
+    speedSliderLabel.textContent = "Speed: " + speedSlider.value;
+    updateDelay = invertedValue;
+});
