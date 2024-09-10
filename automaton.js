@@ -4,6 +4,7 @@ const context = canvas.getContext('2d');
 const gridSize = 100;
 const cellSize = canvas.width / gridSize;
 const grid = [];
+const updateDelay = 50;
 
 function initGrid() {
     for (let x = 0; x < gridSize; x++) {
@@ -25,17 +26,27 @@ function drawGrid() {
 
 function getRandomNeighbor(x, y) {
     const neighbors = [];
-    if (x > 0) neighbors.push(grid[x - 1][y]); // left neighbor
-    if (x < gridSize - 1) neighbors.push(grid[x + 1][y]); // right neighbor
-    if (y > 0) neighbors.push(grid[x][y - 1]); // up neighbor
-    if (y < gridSize - 1) neighbors.push(grid[x][y + 1]); // down neighbor
+
+    // Check left, right, up, down, and diagonals
+    if (x > 0) neighbors.push(grid[x - 1][y]); // left
+    if (x > 0 && y > 0) neighbors.push(grid[x - 1][y - 1]); // up left
+    if (y > 0) neighbors.push(grid[x][y - 1]); // up
+    if (x < gridSize - 1 && y > 0) neighbors.push(grid[x + 1][y - 1]); // up right
+    if (x < gridSize - 1) neighbors.push(grid[x + 1][y]); // right
+    if (x < gridSize - 1 && y < gridSize - 1) neighbors.push(grid[x + 1][y + 1]); // down right
+    if (y < gridSize - 1) neighbors.push(grid[x][y + 1]); // down
+    if (x > 0 && y < gridSize - 1) neighbors.push(grid[x - 1][y + 1]); // down left
+
     return neighbors[Math.floor(Math.random() * neighbors.length)];
 }
 
 function updateGrid() {
+    const probability = 0.75;
     for (let x = 0; x < gridSize; x++) {
         for (let y = 0; y < gridSize; y++) {
-            grid[x][y] = getRandomNeighbor(x, y);
+            if (Math.random() < probability) {
+                grid[x][y] = getRandomNeighbor(x, y);
+            }
         }
     }
 }
@@ -52,7 +63,7 @@ function getRandomColor() {
 function main() {
     updateGrid();
     drawGrid();
-    requestAnimationFrame(main);
+    setTimeout(main, updateDelay);
 }
 
 initGrid();
