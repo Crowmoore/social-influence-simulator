@@ -7,6 +7,6 @@ This project was inspired by a Reddit post on r/cellular_automata by user Alexan
 ## How It Works
 
 - **Grid Initialization**: The grid starts with each cell assigned a random color, representing a different idea, opinion, or cultural trait.
-- **Update Rule**: During each iteration, every cell selects a random neighbor and has a 75% chance of adopting that neighbor’s color, simulating the spread of influence through interaction.
+- **Update Rule**: During each iteration, every cell selects a random neighbor and based on probability adopts that neighbor’s color, simulating the spread of influence through interaction.
 - **Neighborhoods**: Each cell considers its immediate neighbors (up, down, left, right and diagonals) when choosing which idea to adopt.
 - **Visualization**: The grid is rendered on an HTML canvas, with each cell displayed as a colored square, representing the diversity of ideas and their diffusion over time.

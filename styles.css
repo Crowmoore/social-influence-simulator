@@ -5,6 +5,7 @@ canvas {
 }
 
 body {
+    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: antiquewhite;
     margin: 0;
     height: 100vh;
@@ -35,17 +36,65 @@ h1 {
     justify-content: flex-start;
     gap: 10px;
     margin-right: auto;
-    padding-left: 20px;
+    padding-left: 40px;
     height: 70vh;
-    width: 20vh;
+    width: 50vh;
 }
 
-.main-container {
+.info-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: 50px;
+    gap: 10px;
+    margin-left: auto;
+    padding-right: 40px;
+    height: 90vh;
+    width: 50vh;
+    font-size: 14px;
+}
+
+.info-container p {
+    margin-bottom: 2px;
+}
+
+.info-container ul {
+    margin-top: 2px;
+}
+
+.notification {
+    font-size: 14px;
+    font-weight: bold;
+    color: red;
+}
+
+.automaton-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
+}
+
+.button {
+    background-color: #EA4C89;
+    border-radius: 8px;
+    border-style: none;
+    color: #FFFFFF;
+    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    height: 40px;
+    line-height: 20px;
+    padding: 10px 16px;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #F082AC;
+}
+
+.slider {
+    accent-color: #EA4C89;
 }

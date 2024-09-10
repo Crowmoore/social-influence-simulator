@@ -1,16 +1,20 @@
-const canvas = document.getElementById('canvas');
-const context = canvas.getContext('2d');
+const canvas = document.getElementById("canvas");
+const context = canvas.getContext("2d");
 
-const restartButton = document.getElementById('restart-button');
-const gridSizeSlider = document.getElementById('grid-size-slider');
-const gridSizeSliderLabel = document.getElementById('grid-size-slider-label');
-const speedSlider = document.getElementById('speed-slider');
-const speedSliderLabel = document.getElementById('speed-slider-label');
+const restartButton = document.getElementById("restart-button");
+const gridSizeSlider = document.getElementById("grid-size-slider");
+const gridSizeSliderLabel = document.getElementById("grid-size-slider-label");
+const speedSlider = document.getElementById("speed-slider");
+const speedSliderLabel = document.getElementById("speed-slider-label");
+const probabilitySlider = document.getElementById("probability-slider");
+const probabilitySliderLabel = document.getElementById("probability-slider-label");
+const notification = document.getElementById("notification");
 
 let gridSize = 100;
 let newGridSize = gridSize;
 let cellSize;
 let updateDelay = 50;
+let probability = 0.75;
 let newGrid = [];
 let grid = [];
 
@@ -51,7 +55,6 @@ function getRandomNeighbor(x, y) {
 }
 
 function updateGrid() {
-    const probability = 0.75;
     for (let x = 0; x < gridSize; x++) {
         for (let y = 0; y < gridSize; y++) {
             if (Math.random() < probability) {
@@ -67,10 +70,10 @@ function updateGrid() {
 }
 
 function getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
+    const characters = "0123456789ABCDEF";
+    let color = "#";
     for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
+        color += characters[Math.floor(Math.random() * 16)];
     }
     return color;
 }
@@ -79,6 +82,8 @@ function initValues() {
     gridSize = gridSizeSlider.value;
     gridSizeSliderLabel.textContent = "Grid size: " + gridSizeSlider.value;
     speedSliderLabel.textContent = "Speed: " + speedSlider.value;
+    probabilitySliderLabel.textContent = "Probability: " + probabilitySlider.value + "%";
+    notification.style.visibility = "hidden";
     cellSize = canvas.width / gridSize;
 }
 
@@ -97,13 +102,19 @@ function restart() {
 
 restart();
 
-gridSizeSlider.addEventListener('input', function () {
+gridSizeSlider.addEventListener("input", function () {
     gridSizeSliderLabel.textContent = "Grid size: " + gridSizeSlider.value;
     newGridSize = gridSizeSlider.value;
+    notification.style.visibility = "visible";
 });
 
-speedSlider.addEventListener('input', function () {
+speedSlider.addEventListener("input", function () {
     const invertedValue = 100 - speedSlider.value;
     speedSliderLabel.textContent = "Speed: " + speedSlider.value;
     updateDelay = invertedValue;
+});
+
+probabilitySlider.addEventListener("input", function () {
+    probabilitySliderLabel.textContent = "Probability: " + probabilitySlider.value + "%";
+    probability = probabilitySlider.value / 100;
 });

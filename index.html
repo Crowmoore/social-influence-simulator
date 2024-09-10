@@ -13,14 +13,65 @@
         <div class="config-container">
             <label id="speed-slider-label" for="speed-slider">Speed: </label>
             <input type="range" min="1" max="100" value="50" class="slider" id="speed-slider">
+            <label id="probability-slider-label" for="probability-slider">Probability: </label>
+            <input type="range" min="1" max="100" value="75" class="slider" id="probability-slider">
             <label id="grid-size-slider-label" for="grid-size-slider">Grid size: </label>
             <input type="range" min="50" max="500" value="100" class="slider" id="grid-size-slider">
+            <label id="notification" class="notification" style="visibility:hidden;">Restart required</label>
             <br>
-            <button id="restart-button" onClick="restart()">Restart</button>
+            <button id="restart-button" class="button" onClick="restart()">Restart</button>
         </div>
-        <div class="main-container">
-            <h1>Cellular Automaton - Social Influence Simulator</h1>
+        <div class="automaton-container">
             <canvas id="canvas" width="500" height="500"></canvas>
+        </div>
+        <div class="info-container">
+            <div class="info-container">
+                <h1>Social Influence Simulator</h1>
+                <p>
+                    Social Influence Simulator is a simple cellular automaton that simulates the spread of influence or
+                    ideas
+                    in a community. Each cell in a grid represents an individual or a group, with its color symbolizing
+                    a
+                    particular idea, opinion, or cultural trait.
+                </p>
+                <p>
+                    The automaton follows one basic rule: each cell adopts the opinion (color) of a randomly selected
+                    neighbor.
+                    Over time, this leads to the diffusion of ideas and the potential formation of consensus or dominant
+                    cultures.
+                </p>
+                <p>
+                    This project was inspired by a Reddit post on r/cellular_automata by user AlexanderDudarev, who
+                    presented a
+                    similar automaton simulating "war" between cells. You can view the original post
+                    <a
+                        href="https://www.reddit.com/r/cellular_automata/comments/1bmicq6/a_simple_cellular_automaton_that_simulates_war/">here</a>.
+                </p>
+
+                <h3>Features</h3>
+                <ul>
+                    <li><strong>Grid Initialization</strong>: The grid starts with each cell assigned a random color,
+                        representing a different idea, opinion, or cultural trait.
+                    </li>
+                    <li><strong>Update Rule</strong>: During each iteration, every cell selects a random neighbor and,
+                        based on probability, adopts that neighbor’s color, simulating the spread of influence through
+                        interaction.
+                    </li>
+                    <li><strong>Neighborhoods</strong>: Each cell considers its immediate neighbors (up, down, left,
+                        right,
+                        and diagonals) when choosing which idea to adopt.
+                    </li>
+                    <li><strong>Visualization</strong>: Each cell is displayed as a colored square, representing the
+                        diversity
+                        of ideas and their diffusion over time.
+                    </li>
+                </ul>
+
+                <p>
+                    Source code @ <a href="https://github.com/Crowmoore/social-influence-simulator">GitHub</a>.
+                </p>
+            </div>
+
         </div>
     </div>
 </body>
