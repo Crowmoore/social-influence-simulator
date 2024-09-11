@@ -77,6 +77,16 @@ h1 {
     height: 100%;
 }
 
+.control-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
 .button {
     background-color: #EA4C89;
     border-radius: 8px;
@@ -89,6 +99,7 @@ h1 {
     line-height: 20px;
     padding: 10px 16px;
     text-align: center;
+    min-width: 100px;
 }
 
 .button:hover {

@@ -2,71 +2,75 @@ const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 
 const restartButton = document.getElementById("restart-button");
+const toggleRunningButton = document.getElementById("toggle-running-button");
 const gridSizeSlider = document.getElementById("grid-size-slider");
 const gridSizeSliderLabel = document.getElementById("grid-size-slider-label");
-const speedSlider = document.getElementById("speed-slider");
-const speedSliderLabel = document.getElementById("speed-slider-label");
+const updateDelaySlider = document.getElementById("update-delay-slider");
+const updateDelaySliderLabel = document.getElementById("update-delay-label");
 const probabilitySlider = document.getElementById("probability-slider");
 const probabilitySliderLabel = document.getElementById("probability-slider-label");
 const notification = document.getElementById("notification");
 
-let gridSize = 100;
+let gridSize = gridSizeSlider.value;
 let newGridSize = gridSize;
 let cellSize;
-let updateDelay = 50;
-let probability = 0.75;
+let updateDelay = updateDelaySlider.value;
+let probability = probabilitySlider.value;
 let newGrid = [];
 let grid = [];
-
+let running = false;
+let loopTimeoutId;
 
 function initGrid() {
-    for (let x = 0; x < gridSize; x++) {
-        grid[x] = [];
-        newGrid[x] = [];
-        for (let y = 0; y < gridSize; y++) {
-            grid[x][y] = getRandomColor();
+    for (let row = 0; row < gridSize; row++) {
+        grid[row] = [];
+        newGrid[row] = [];
+        for (let column = 0; column < gridSize; column++) {
+            grid[row][column] = getRandomColor();
         }
     }
 }
 
 function drawGrid() {
-    for (let x = 0; x < gridSize; x++) {
-        for (let y = 0; y < gridSize; y++) {
-            context.fillStyle = grid[x][y];
-            context.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+    for (let row = 0; row < gridSize; row++) {
+        for (let column = 0; column < gridSize; column++) {
+            context.fillStyle = grid[row][column];
+            context.fillRect(row * cellSize, column * cellSize, cellSize, cellSize);
         }
     }
 }
 
-function getRandomNeighbor(x, y) {
+function getRandomNeighbor(row, column) {
     const neighbors = [];
 
     // Check left, right, up, down, and diagonals
-    if (x > 0) neighbors.push(grid[x - 1][y]); // left
-    if (x > 0 && y > 0) neighbors.push(grid[x - 1][y - 1]); // up left
-    if (y > 0) neighbors.push(grid[x][y - 1]); // up
-    if (x < gridSize - 1 && y > 0) neighbors.push(grid[x + 1][y - 1]); // up right
-    if (x < gridSize - 1) neighbors.push(grid[x + 1][y]); // right
-    if (x < gridSize - 1 && y < gridSize - 1) neighbors.push(grid[x + 1][y + 1]); // down right
-    if (y < gridSize - 1) neighbors.push(grid[x][y + 1]); // down
-    if (x > 0 && y < gridSize - 1) neighbors.push(grid[x - 1][y + 1]); // down left
+    if (row > 0) neighbors.push(grid[row - 1][column]); // left
+    if (row > 0 && column > 0) neighbors.push(grid[row - 1][column - 1]); // up left
+    if (column > 0) neighbors.push(grid[row][column - 1]); // up
+    if (row < gridSize - 1 && column > 0) neighbors.push(grid[row + 1][column - 1]); // up right
+    if (row < gridSize - 1) neighbors.push(grid[row + 1][column]); // right
+    if (row < gridSize - 1 && column < gridSize - 1) neighbors.push(grid[row + 1][column + 1]); // down right
+    if (column < gridSize - 1) neighbors.push(grid[row][column + 1]); // down
+    if (row > 0 && column < gridSize - 1) neighbors.push(grid[row - 1][column + 1]); // down left
 
     return neighbors[Math.floor(Math.random() * neighbors.length)];
 }
 
 function updateGrid() {
-    for (let x = 0; x < gridSize; x++) {
-        for (let y = 0; y < gridSize; y++) {
+    for (let row = 0; row < gridSize; row++) {
+        for (let column = 0; column < gridSize; column++) {
             if (Math.random() < probability) {
-                newGrid[x][y] = getRandomNeighbor(x, y);
+                newGrid[row][column] = getRandomNeighbor(row, column);
             }
             else {
-                newGrid[x][y] = grid[x][y];
+                newGrid[row][column] = grid[row][column];
             }
         }
     }
-    // Deep copy newGrid to grid
-    grid = newGrid.map(arr => arr.slice());
+    // Swap grid with newGrid
+    let temp = grid;
+    grid = newGrid;
+    newGrid = temp;
 }
 
 function getRandomColor() {
@@ -81,26 +85,46 @@ function getRandomColor() {
 function initValues() {
     gridSize = gridSizeSlider.value;
     gridSizeSliderLabel.textContent = "Grid size: " + gridSizeSlider.value;
-    speedSliderLabel.textContent = "Speed: " + speedSlider.value;
+    updateDelaySliderLabel.textContent = "Update delay: " + updateDelaySlider.value + "ms";
     probabilitySliderLabel.textContent = "Probability: " + probabilitySlider.value + "%";
     notification.style.visibility = "hidden";
     cellSize = canvas.width / gridSize;
 }
 
-function main() {
-    updateGrid();
-    drawGrid();
-    setTimeout(main, updateDelay);
+function mainLoop() {
+    if (running) {
+        updateGrid();
+        drawGrid();
+        loopTimeoutId = setTimeout(mainLoop, updateDelay);
+    }
 }
 
 function restart() {
+    clearTimeout(loopTimeoutId);
     initValues()
     initGrid();
     drawGrid();
-    main();
+    mainLoop();
 }
 
-restart();
+function setup() {
+    initValues();
+    initGrid();
+    drawGrid();
+}
+
+function toggleRunning() {
+    running = !running;
+    if (running) {
+        toggleRunningButton.textContent = "Stop";
+        mainLoop();
+    } else {
+        clearTimeout(loopTimeoutId);
+        toggleRunningButton.textContent = "Start";
+    }
+}
+
+setup();
 
 gridSizeSlider.addEventListener("input", function () {
     gridSizeSliderLabel.textContent = "Grid size: " + gridSizeSlider.value;
@@ -108,10 +132,9 @@ gridSizeSlider.addEventListener("input", function () {
     notification.style.visibility = "visible";
 });
 
-speedSlider.addEventListener("input", function () {
-    const invertedValue = 100 - speedSlider.value;
-    speedSliderLabel.textContent = "Speed: " + speedSlider.value;
-    updateDelay = invertedValue;
+updateDelaySlider.addEventListener("input", function () {
+    updateDelaySliderLabel.textContent = "Update delay: " + updateDelaySlider.value + "ms";
+    updateDelay = updateDelaySlider.value;
 });
 
 probabilitySlider.addEventListener("input", function () {
