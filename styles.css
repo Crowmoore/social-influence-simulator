@@ -155,3 +155,40 @@ h1 {
 .slider::-webkit-slider-thumb:hover {
     transform: scale(1.2);
 }
+
+@media (max-width: 1000px) {
+    .content-container {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .automaton-container {
+        order: 1;
+    }
+
+    .control-container {
+        order: 2;
+    }
+
+    .config-container {
+        order: 3;
+        width: 22%;
+        margin: 0 auto;
+    }
+
+    .info-container {
+        order: 4;
+        max-width: 80%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 900px) {
+    .config-container {
+        width: 30%;
+        margin: 0 auto;
+    }
+}
