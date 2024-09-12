@@ -167,7 +167,7 @@ h1 {
 
     .automaton-container {
         order: 1;
-        width: 80%;
+        width: 80vw;
     }
 
     .control-container {
@@ -176,14 +176,15 @@ h1 {
 
     .config-container {
         order: 3;
-        width: 22%;
+        width: 22vw;
         margin: 0 auto;
     }
 
     .info-container {
         order: 4;
-        max-width: 80%;
+        max-width: 80vw;
         margin: 0 auto;
+        margin-bottom: 20px;
     }
 }
 
