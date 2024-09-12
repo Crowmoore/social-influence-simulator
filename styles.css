@@ -1,12 +1,29 @@
 canvas {
-    display: block;
+    display: flex;
     margin: 0 auto;
-    border: 1px solid black;
+    border: 5px solid black;
+    border-radius: 15px;
+    box-shadow: 5px 5px black;
+}
+
+.lexend-mega-title {
+    font-family: "Lexend Mega", sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+p,
+label {
+    font-family: "Lexend Mega", sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    margin-bottom: 2px;
 }
 
 body {
-    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: antiquewhite;
+    font-family: "Lexend Mega", sans-serif;
+    background-color: #BAFCA2;
     margin: 0;
     height: 100vh;
     display: flex;
@@ -18,63 +35,66 @@ body {
 h1 {
     text-align: center;
     width: 100%;
+    margin-bottom: 0;
 }
 
 .content-container {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    margin-top: 100px;
     flex-grow: 1;
     width: 100%;
 }
 
 .config-container {
+    background-color: #DAF5F0;
+    border: 5px solid black;
+    color: #000;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     gap: 10px;
-    margin-right: auto;
-    padding-left: 40px;
-    height: 70vh;
-    width: 50vh;
+    border-radius: 15px;
+    box-shadow: 5px 5px black;
+    width: 31%;
+    padding: 30px;
+    margin-left: 50px;
 }
 
 .info-container {
+    background-color: #DAF5F0;
+    border: 5px solid black;
+    color: #000;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
-    margin-left: auto;
-    padding-right: 40px;
-    height: 90vh;
-    width: 50vh;
-    font-size: 14px;
-}
-
-.info-container p {
-    margin-bottom: 2px;
-}
-
-.info-container ul {
-    margin-top: 2px;
+    border-radius: 15px;
+    box-shadow: 5px 5px black;
+    max-width: 28%;
+    height: auto;
+    padding: 20px;
+    margin-right: 50px;
 }
 
 .notification {
+    font-family: "Lexend Mega", sans-serif;
     font-size: 14px;
     font-weight: bold;
-    color: red;
+    font-style: normal;
+    color: #FF6B6B;
 }
 
 .automaton-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     width: 100%;
-    height: 100%;
 }
 
 .control-container {
@@ -90,9 +110,10 @@ h1 {
 .button {
     background-color: #EA4C89;
     border-radius: 8px;
-    border-style: none;
+    border: 2px solid black;
+    box-shadow: 3px 3px black;
     color: #FFFFFF;
-    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Lexend Mega", sans-serif;
     font-size: 14px;
     font-weight: 500;
     height: 40px;
@@ -100,12 +121,37 @@ h1 {
     padding: 10px 16px;
     text-align: center;
     min-width: 100px;
+    transition: transform .2s;
 }
 
 .button:hover {
-    background-color: #F082AC;
+    transform: scale(1.2);
 }
 
 .slider {
-    accent-color: #EA4C89;
+    -webkit-appearance: none;
+    appearance: none;
+    accent-color: #FFB2EF;
+    background-color: #EA4C89;
+    height: 15px;
+    border: 2px solid black;
+    border-radius: 8px;
+    box-shadow: 3px 3px black;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #FFB2EF;
+    border: 2px solid black;
+    border-radius: 50%;
+    box-shadow: 3px 3px black;
+    cursor: pointer;
+    transition: transform .2s;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
 }
