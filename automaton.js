@@ -84,7 +84,7 @@ function getRandomColor() {
 
 function initValues() {
     gridSize = gridSizeSlider.value;
-    gridSizeSliderLabel.textContent = "Grid size: " + gridSizeSlider.value;
+    gridSizeSliderLabel.textContent = "Grid size: " + gridSizeSlider.value + "x" + gridSizeSlider.value;
     updateDelaySliderLabel.textContent = "Update delay: " + updateDelaySlider.value + "ms";
     probabilitySliderLabel.textContent = "Probability: " + probabilitySlider.value + "%";
     notification.style.visibility = "hidden";
@@ -127,7 +127,7 @@ function toggleRunning() {
 setup();
 
 gridSizeSlider.addEventListener("input", function () {
-    gridSizeSliderLabel.textContent = "Grid size: " + gridSizeSlider.value;
+    gridSizeSliderLabel.textContent = "Grid size: " + gridSizeSlider.value + "x" + gridSizeSlider.value;
     newGridSize = gridSizeSlider.value;
     notification.style.visibility = "visible";
 });
