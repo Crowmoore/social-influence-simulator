@@ -163,7 +163,7 @@ h1 {
 
     .automaton-container {
         order: 1;
-        width: 80%;
+        width: 100%;
     }
 
     .control-container {
@@ -172,8 +172,9 @@ h1 {
 
     .config-container {
         order: 3;
-        width: 22%;
+        width: 80%;
         margin: 0 auto;
+        align-items: center;
     }
 
     .info-container {
@@ -182,12 +183,24 @@ h1 {
         margin: 0 auto;
         margin-bottom: 20px;
     }
-}
 
-@media (max-width: 900px) {
-    .config-container {
-        width: 30%;
-        margin: 0 auto;
+    .slider {
+        height: 30px;
+        width: 200px;
+    }
+
+    .slider::-webkit-slider-thumb {
+        width: 45px;
+        height: 45px;
+    }
+
+    p,
+    label {
+        font-family: "Lexend Mega", sans-serif;
+        font-size: 16px;
+        font-weight: normal;
+        font-style: normal;
+        margin-bottom: 2px;
     }
 }
 
@@ -211,24 +224,5 @@ h1 {
     .info-container {
         min-width: 400px;
         margin-bottom: 20px;
-    }
-
-    .slider {
-        height: 30px;
-        width: 200px;
-    }
-
-    .slider::-webkit-slider-thumb {
-        width: 45px;
-        height: 45px;
-    }
-
-    p,
-    label {
-        font-family: "Lexend Mega", sans-serif;
-        font-size: 16px;
-        font-weight: normal;
-        font-style: normal;
-        margin-bottom: 2px;
     }
 }
