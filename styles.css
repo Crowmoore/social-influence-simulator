@@ -202,12 +202,33 @@ h1 {
     }
 
     .config-container {
-        width: 50%;
-        margin: 0 auto;
+        width: 80%;
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
     }
 
     .info-container {
         min-width: 400px;
         margin-bottom: 20px;
+    }
+
+    .slider {
+        height: 30px;
+        width: 200px;
+    }
+
+    .slider::-webkit-slider-thumb {
+        width: 45px;
+        height: 45px;
+    }
+
+    p,
+    label {
+        font-family: "Lexend Mega", sans-serif;
+        font-size: 16px;
+        font-weight: normal;
+        font-style: normal;
+        margin-bottom: 2px;
     }
 }
