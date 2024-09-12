@@ -167,6 +167,7 @@ h1 {
 
     .automaton-container {
         order: 1;
+        width: 80%;
     }
 
     .control-container {
