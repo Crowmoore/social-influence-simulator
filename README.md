@@ -4,6 +4,10 @@ This project is a simple cellular automaton that simulates the spread of influen
 
 This project was inspired by a Reddit post on r/cellular_automata by user AlexanderDudarev, who presented a similar automaton simulating "war" between cells. You can view the original post [here](https://www.reddit.com/r/cellular_automata/comments/1bmicq6/a_simple_cellular_automaton_that_simulates_war/).
 
+## Preview
+
+<video src="https://github.com/user-attachments/assets/ea6c7540-1c15-41bc-a043-8a0ff92daaa1"></video>
+
 ## How It Works
 
 - **Grid Initialization**: The grid starts with each cell assigned a random color, representing a different idea, opinion or cultural trait.
