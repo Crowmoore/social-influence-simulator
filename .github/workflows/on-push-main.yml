@@ -20,4 +20,10 @@ jobs:
         aws-region: eu-north-1
 
     - name: Deploy static site to S3 bucket
-      run: aws s3 sync . s3://jokketech.com/social-influence-simulator --delete
+      run: aws s3 sync . s3://jokketech.com/social-influence-simulator \
+        --exclude "*" \
+        --include "index.html" \
+        --include "automaton.js" \
+        --include "styles.css" \
+        --include "icon.png" \
+        --delete
